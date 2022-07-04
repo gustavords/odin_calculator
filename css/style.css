@@ -1,0 +1,243 @@
+:root {
+  --red: #9c0000;
+  --brown: #640000;
+  --black: #380107;
+  --orange: #d65c30;
+  --purple: #a66f8c;
+  --red-o: #9c0000c2;
+  --brown-o: #640000c2;
+  --black-o: #380107c2;
+  --orange-o: #d65c30c2;
+  --purple-o: #a66f8cc2;
+
+  --white: #e9d5d3;
+  --grey: #b2acb5;
+  --white-o: #e9d5d3c2;
+  --grey-o: #b2acb5c2;
+
+  --green: #65af50;
+  --blue: #0873ba;
+}
+
+@font-face {
+  font-family: Orbitron;
+  src: url(../fonts/Orbitron-VariableFont_wght.ttf);
+}
+
+* {
+  font-family: Orbitron;
+}
+
+body {
+  background-color: var(--black);
+}
+.title {
+  display: flex;
+  color: white;
+  justify-content: center;
+  column-gap: 1em;
+  font-size: 250%;
+}
+.eva02 {
+  color: var(--orange);
+  font-style: italic;
+
+  transform: scale(1, 2.5);
+}
+
+.content {
+  background-color: var(--white);
+  border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 2em;
+}
+
+.calculator {
+  padding: 1em;
+  height: 42em;
+  width: 28em;
+  background-color: var(--red-o);
+  border-style: solid;
+  border-width: 15px;
+  border-color: var(--red);
+  border-radius: 25px;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "display display display display display"
+    "ac pn mod del div"
+    "nums nums nums nums mul"
+    "nums nums nums nums minus"
+    "nums nums nums nums plus"
+    "nums nums nums nums plus"
+    "_0 _0 _0 point equal ";
+  /* gap: 1em; */
+}
+
+/*-----display screen------*/
+
+.cal-display-item {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 0.2em;
+  margin-bottom: 0.5em;
+
+  grid-area: display;
+  background-color: var(--black);
+  /* border: solid 1px white; */
+  border-style: solid;
+  border-color: var(--blue);
+  border-width: 5px;
+  border-radius: 3px;
+
+  font-size: 300%;
+  color: var(--green);
+}
+
+/*-----operator buttons------*/
+.cal-ac-item,
+.cal-point-item,
+.cal-pn-item,
+.cal-mod-item,
+.cal-del-item,
+.cal-div-item,
+.cal-mul-item,
+.cal-minus-item,
+.cal-plus-item,
+.cal-equal-item {
+  background-color: var(--purple-o);
+  border-width: 10px;
+  border-radius: 8%;
+  border-color: var(--purple);
+  padding: 1em;
+  font-size: larger;
+
+  font-weight: bolder;
+  padding: 0 1em;
+  color: var(--white);
+}
+
+.cal-ac-item,
+.cal-equal-item {
+  background-color: white;
+  border-width: 10px;
+  border-radius: 8%;
+  border-color: whitesmoke;
+  font-weight: bolder;
+  color: var(--black);
+}
+.cal-point-item {
+  font-size: 300%;
+  padding: 0;
+  font-weight: bolder;
+  color: orange;
+}
+
+.cal-pn-item,
+.cal-del-item {
+  font-weight: bolder;
+  color: orange;
+}
+
+.cal-ac-item {
+  grid-area: ac;
+}
+.cal-del-item {
+  grid-area: del;
+}
+.cal-plus-item {
+  grid-area: plus;
+}
+.cal-minus-item {
+  grid-area: minus;
+}
+.cal-mul-item {
+  grid-area: mul;
+}
+.cal-div-item {
+  grid-area: div;
+}
+.cal-equal-item {
+  grid-area: equal;
+}
+.cal-pn-item {
+  grid-area: pn;
+}
+.cal-mod-item {
+  grid-area: mod;
+}
+.cal-point-item {
+  grid-area: point;
+}
+
+/*-----number buttons------*/
+.cal-nums-item {
+  grid-area: nums;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "_7 _8 _9 "
+    "_4 _5 _6 "
+    "_1 _2 _3 ";
+}
+
+.cal-0-item,
+.cal-1-item,
+.cal-2-item,
+.cal-3-item,
+.cal-4-item,
+.cal-5-item,
+.cal-6-item,
+.cal-7-item,
+.cal-8-item,
+.cal-9-item {
+  background-color: var(--orange-o);
+  box-sizing: border-box;
+  display: flex;
+
+  border-radius: 17% 10% 17% 10%;
+  border-width: 10px;
+  border-color: var(--orange);
+  padding: 1em 0 0 1em;
+
+  font-size: x-large;
+  font-weight: bolder;
+
+  color: var(--white);
+}
+.cal-0-item {
+  grid-area: _0;
+}
+.cal-1-item {
+  grid-area: _1;
+}
+.cal-2-item {
+  grid-area: _2;
+}
+.cal-3-item {
+  grid-area: _3;
+}
+.cal-4-item {
+  grid-area: _4;
+}
+.cal-5-item {
+  grid-area: _5;
+}
+.cal-6-item {
+  grid-area: _6;
+}
+.cal-7-item {
+  grid-area: _7;
+}
+.cal-8-item {
+  grid-area: _8;
+}
+.cal-9-item {
+  grid-area: _9;
+}
