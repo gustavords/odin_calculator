@@ -47,11 +47,12 @@ body {
 
 .content {
   background-color: var(--white);
-  border: solid 1px black;
+  border: solid 2px var(--green);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1em 2em;
+  margin: 0;
 }
 
 .calculator {
@@ -84,8 +85,11 @@ body {
   display: flex;
   justify-content: right;
   align-items: center;
+
+  height: 110px;
   padding: 0.2em;
-  margin-bottom: 0.5em;
+  /* margin-bottom: 0.5em; */
+
 
   grid-area: display;
   background-color: var(--black);
