@@ -5,9 +5,8 @@ const numBtns = document.querySelectorAll(`.num`);
 let currentValue = ``;
 let buttonValuePressed = ``;
 let displayText = ``;
-let valueA = 0;
-
-let equalWasPressed = false;
+let value = 0;
+let oprtrArr = [];
 
 //eventlistener for the number buttons
 numBtns.forEach((button) => {
@@ -33,9 +32,7 @@ numBtns.forEach((button) => {
     //limit numbers entered
     if (currentValue.length > 9) {
       buttons.disabled = true;
-
-      //blocks buttons
-      blockAllNumBtn(true);
+      blockAllNumBtn(true); ///TODO:this is a bad function change it
 
       console.log(`worked`);
     } else {
@@ -47,7 +44,6 @@ numBtns.forEach((button) => {
   });
 });
 
-console.log(`currentValue: ${currentValue}`);
 
 //event listener for operator buttons
 buttons.forEach((button) => {
@@ -68,19 +64,24 @@ buttons.forEach((button) => {
       case "-":
         sub();
         break;
+      case `*`:
+        mul();
+        break;
+      case `/`:
+        div();
+        break;
+      case `%`:
+        mod();
+        break;
+      case `+/-`:
+        signum();
+        break;
       case "=":
         equals();
         break;
       default:
         console.log(`e.target.textContent:${e.target.textContent} was pressed`);
     }
-
-    // if (e.target.textContent === `=`) {
-    //   console.log(`equalWasPressed:${(equalWasPressed = true)} `);
-    //   equals();
-    //   console.log(`equalWasPressed:${equalWasPressed}`);
-    //   // equalBtnPressed();
-    // }
   });
 });
 
@@ -89,74 +90,80 @@ function clearDisplay() {
   currentValue = ``;
 }
 
-let array = [];
-
 function add() {
-  // array.push(`+`);
-
-  // if (array[array.length - 1] === `+`) {
-  //   console.log(` is + -> array[array.length-1]: ${array[array.length - 1]}`);
-  // }
-
-  if (valueA === 0) {
-    valueA = +currentValue;
+  if (value === 0) {
+    value = +currentValue;
     currentValue = ``;
-    // array.push(`+`);
-  } else if (array[array.length - 1] != `+`) {
-    console.log(
-      ` is not + -> array[array.length-1]: ${array[array.length - 1]}`
-    );
-    console.log(`is not + -> valueA:${valueA}`);
-    console.log(`is not + -> curretnValue:${currentValue}`);
-
+  } else if (oprtrArr[oprtrArr.length - 1] != `+`) {
     equals();
-    // array.push(`+`);
   } else {
-    // display.textContent = ``;
-    valueA += +currentValue;
-    display.textContent = `${valueA}`;
+    value += +currentValue;
+    display.textContent = `${value}`;
     currentValue = ``;
-    // array.push(`+`);
-    console.log(`in else + valueA:${valueA}`);
   }
-  array.push(`+`);
-  console.log(`valueA:${valueA}`);
+  oprtrArr.push(`+`);
+  console.log(`value:${value}`);
 }
 
 function sub() {
-  if (valueA === 0) {
-    valueA = +currentValue;
+  if (value === 0) {
+    value = +currentValue;
     currentValue = ``;
-    array.push(`-`);
-  } else if (array[array.length - 1] != `-`) {
-    console.log(
-      ` is not - -> array[array.length-1]: ${array[array.length - 1]}`
-    );
-    console.log(`is not - -> valueA:${valueA}`);
-    console.log(`is not - -> curretnValue:${currentValue}`);
-
+  } else if (oprtrArr[oprtrArr.length - 1] != `-`) {
     equals();
-    array.push(`-`);
   } else {
-    // display.textContent = ``;
-    valueA -= +currentValue;
-    display.textContent = `${valueA}`;
+    value -= +currentValue;
+    display.textContent = `${isMoreThan10Digits(value)}`;
     currentValue = ``;
-    array.push(`-`);
-    console.log(`in else - valueA:${valueA}`);
   }
-
-  console.log(`valueA:${valueA}`);
+  oprtrArr.push(`-`);
+  console.log(`value:${value}`);
 }
 
-function mul() {}
+function mul() {
+  if (value === 0) {
+    value = +currentValue;
+    currentValue = ``;
+  } else if (oprtrArr[oprtrArr.length - 1] != `*`) {
+    equals();
+  } else {
+    value *= +currentValue;
+    display.textContent = `${isMoreThan10Digits(value)}`;
+    currentValue = ``;
+  }
+  oprtrArr.push(`*`);
+}
 
-function div() {}
+function div() {
+  if (value === 0) {
+    value = +currentValue;
+    currentValue = ``;
+  } else if (oprtrArr[oprtrArr.length - 1] != `/`) {
+    equals();
+  } else {
+    value /= +currentValue;
+    display.textContent = `${isMoreThan10Digits(value)}`;
+    currentValue = ``;
+  }
+  oprtrArr.push(`/`);
+}
 
-function mod() {}
+function mod() {
+  if (value === 0) {
+    value = +currentValue;
+    currentValue = ``;
+  } else if (oprtrArr[oprtrArr.length - 1] != `%`) {
+    equals();
+  } else {
+    value %= +currentValue;
+    display.textContent = `${isMoreThan10Digits(value)}`;
+    currentValue = ``;
+  }
+  oprtrArr.push(`%`);
+}
 
 function equals() {
-  switch (array[array.length - 1]) {
+  switch (oprtrArr[oprtrArr.length - 1]) {
     case `+`:
       add();
       break;
@@ -175,8 +182,13 @@ function equals() {
     default:
       console.log(`nothing ran`);
   }
-  array = [];
+  oprtrArr = [];
   return (equalWasPressed = false);
+}
+
+function signum() {
+  currentValue = currentValue * -1;
+  display.textContent = `${currentValue}`;
 }
 
 function equalBtnPressed() {
@@ -194,11 +206,6 @@ function equalBtnPressed() {
   } else {
     console.log(`currentCalc: ${currentCalc}`);
   }
-  // if(boolean){
-  // currentCalc = ``;
-
-  // }
-  // return false;
 }
 
 function delBtn() {
@@ -212,10 +219,9 @@ function acBtn() {
   display.textContent = ``;
   currentValue = ``;
   blockAllNumBtn(false);
-  // reset add array
-  calcArr = [];
-
-  valueA = 0;
+  // reset add oprtrArr
+  oprtrArr = [];
+  value = 0;
 }
 
 function blockAllNumBtn(boolean) {
@@ -227,7 +233,13 @@ function blockAllNumBtn(boolean) {
     numBtns.forEach((x) => {
       x.style.cssText = `color: var(--white); background-color: var(--orange-o);`;
     });
+    document.querySelector(
+      `.cal-point-item`
+    ).style.cssText = `color: orange; background-color: var(--purple-o);`;
   }
 }
 
-// function add() {}
+//only 10 digits fit in the display window
+function isMoreThan10Digits(value) {
+  return value.toString().length > 9 ? value.toExponential(4) : value;
+}
