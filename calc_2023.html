@@ -1,69 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css/style_2023.css" />
+		<script async src="./js/script_2023.js"></script>
+		<title>Calculator 2023</title>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style_2023.css" />
-    <script async src="./js/script_2023.js"></script>
-    <title>Calculator 2023</title>
-</head>
+	<body>
+		<head>
+			<h1>Calculator</h1>
+		</head>
+		<div id="calculator">
+			<div id="calc-display">
+				<p id="history"></p>
 
-<body>
+				<p id="text"></p>
+			</div>
+			<div id="buttons">
+				<!-- <div id="numberBtns"> -->
 
-    <head>
-        <h1>Calculator</h1>
-    </head>
-    <div id="calculator">
-        <div id="calc-display">
-            <div id="text"></div>
-        </div>
-        <div id="buttons">
-            <!-- <div id="numberBtns"> -->
+				<div class="row">
+					<button class="oprBtn btn" id="oprClr">Clear</button>
+					<button class="oprBtn btn" id="oprDel">del</button>
+					<button class="oprBtn btn opr" id="oprMod">%</button>
+					<button class="oprBtn btn opr" id="oprDiv">/</button>
+				</div>
+				<div class="row">
+					<button class="numBtn btn" id="num7">7</button>
+					<button class="numBtn btn" id="num8">8</button>
+					<button class="numBtn btn" id="num9">9</button>
+					<button class="oprBtn btn opr" id="oprMul">*</button>
+				</div>
+				<div class="row">
+					<button class="numBtn btn" id="num4">4</button>
+					<button class="numBtn btn" id="num5">5</button>
+					<button class="numBtn btn" id="num6">6</button>
+					<button class="oprBtn btn opr" id="oprSub">-</button>
+				</div>
+				<div class="row">
+					<button class="numBtn btn" id="num1">1</button>
+					<button class="numBtn btn" id="num2">2</button>
+					<button class="numBtn btn" id="num3">3</button>
+					<button class="oprBtn btn opr" id="oprAdd">+</button>
+				</div>
+				<div class="row">
+					<button class="oprBtn btn" id="oprSign">+/-</button>
+					<button class="numBtn btn" id="num0">0</button>
+					<button class="oprBtn btn" id="oprDeci">.</button>
+					<button class="oprBtn btn" id="oprEqu">=</button>
+				</div>
+				<!-- </div> -->
 
-            <div class="row">
-                <button class="oprBtn btn" id="oprClr">Clear</button>
-                <button class="oprBtn btn" id="oprDel"> del </button>
-                <button class="oprBtn btn" id="oprMod">%</button>
-                <button class="oprBtn btn" id="oprDiv">/</button>
-            </div>
-            <div class="row">
-                <button class="numBtn btn" id="num7">7</button>
-                <button class="numBtn btn" id="num8">8</button>
-                <button class="numBtn btn" id="num9">9</button>
-                <button class="oprBtn btn" id="oprMul">*</button>
+				<!-- <div id="operatorBtns"> -->
 
-            </div>
-            <div class="row">
-                <button class="numBtn btn" id="num4">4</button>
-                <button class="numBtn btn" id="num5">5</button>
-                <button class="numBtn btn" id="num6">6</button>
-                <button class="oprBtn btn" id="oprSub">-</button>
-            </div>
-            <div class="row">
-                <button class="numBtn btn" id="num1">1</button>
-                <button class="numBtn btn" id="num2">2</button>
-                <button class="numBtn btn" id="num3">3</button>
-                <button class="oprBtn btn" id="oprAdd">+</button>
-            </div>
-            <div class="row">
-                <button class="oprBtn btn" id="oprSign">+/-</button>
-                <button class="numBtn btn" id="num0">0</button>
-                <button class="oprBtn btn" id="oprDeci">.</button>
-                <button class="oprBtn btn" id="oprEqu">=</button>
-            </div>
-            <!-- </div> -->
-
-            <!-- <div id="operatorBtns"> -->
-
-            <!-- </div> -->
-        </div>
-    </div>
-    <footer>
-        <p>Coopyright &copy dasilgus</p>
-    </footer>
-
-</body>
-
+				<!-- </div> -->
+			</div>
+		</div>
+		<footer>
+			<p>Coopyright &copy dasilgus</p>
+		</footer>
+	</body>
 </html>

@@ -1,74 +1,157 @@
-/**
- * must do's:
- *  + create calc functions:
- *      - add, multiply, subtract, divide 
- *      - operate, takes operator and 2 numbers and performs on of the above functions
- *      
- * + create simple html calculator
- *      - must have operators +,-,*,/
- *      - equals and clear button
- * 
- * + create display functions:
- *      - display pressed buttons function
- * 
- * + create logic functions:
- *      - calculations should happen once at a time, 12 + 7 - 5 * 3 = should yield 42.
- *      - calculation should happen and be displayed when the third number is pressed
- * 
- */
+const calcArr = [];
+const display = document.getElementById(`calc-display`);
+const text = document.getElementById(`text`);
+const numbers = document.getElementsByClassName(`numBtn`);
+const operations = document.getElementsByClassName(`oprBtn`);
+const opr = document.getElementsByClassName(`opr`);
+const history = document.getElementById(`history`);
+const clearBtn = document.getElementById(`oprClr`);
+const delBtn = document.getElementById(`oprDel`);
 
-//Pseudo Code 1.0
-
-
-let firstNum;
-let secondNum;
+let displayHistory = ``;
+let pressed = ``;
+// let firstNum;
+// let secondNum;
 let operator;
 
-const add = (a, b) => { return a + b };
-const subtract = (a, b) => { return a - b };
-const multiply = (a, b) => { return a * b };
-const divide = (a, b) => { return a / b };
+/**
+ * TODO: turn into an operations object
+ *
+ */
+const add = (a, b) => {
+	return a + b;
+};
+const subtract = (a, b) => {
+	return a - b;
+};
+const multiply = (a, b) => {
+	return a * b;
+};
+const divide = (a, b) => {
+	return a / b;
+};
 
-function operate(firstNum, operate, secondNum) {
-    switch (operate) {
-        case `+`:
-            return add(firstNum, secondNum);
-        case `-`:
-            return subtract(firstNum, secondNum);
-        case `*`:
-            return multiply(firstNum, secondNum);
-        case `/`:
-            return divide(firstNum, secondNum);
-        default:
-            return `error`;
-    }
+
+/**
+ * TODO: make history work for multiple numbers pressed
+ */
+//event for displays pressed numbers
+for (let button of numbers) {
+	button.addEventListener(`click`, () => {
+		
+		//removes text
+		text.textContent = ``;
+		//creates a string with all numbers pressed
+		pressed += button.textContent;
+		//displays to display
+		text.textContent = pressed;
+		//re-enables operation buttons
+
+		//might go
+		history.textContent += pressed + ` `;
+
+
+		disableBtn(opr, false);
+	});
 }
 
+//does all operations
+/**
+ * TODO:
+ * possibly place most of it into a calculate function,
+ * and just let the event focus on the display
+ */
+for (let button of operations) {
+	button.addEventListener(`click`, () => {
+		//clears pressed buttons
+		pressed = ``;
 
-let displayValue = ``;
-const display = document.getElementById(`calc-display`);
-const numbers = document.getElementsByClassName(`numBtn`);
+		//for array after equals is used
+		if (calcArr.length === 1) {
+			calcArr.splice(0, 1);
+			console.log(calcArr);
+		}
 
-for(let button of numbers){
-    button.addEventListener(`click`, () =>{
+		//pushes value into array
+		calcArr.push(text.textContent);
 
-        display.textContent += button.textContent;
-        displayValue = display.textContent;
-        console.log(displayValue);
-    });
+		if (
+			button.textContent == `+` ||
+			button.textContent == `-` ||
+			button.textContent == `*` ||
+			button.textContent == `/`
+		) {
+			calcArr.push(button.textContent);
+			disableBtn(opr, true);
+		}
+
+		calculate();
+		
+
+		//appends to history display
+		//might come off
+		if (
+			button.textContent == `+` ||
+			button.textContent == `-` ||
+			button.textContent == `*` ||
+			button.textContent == `/`
+		) {
+		history.textContent += button.textContent + ` `;
+		}
+		
+	});
 }
 
-// console.log(
-//     `add(5,5) = ${add(5, 5)}
-// subtract(4,5) = ${subtract(4, 5)}
-// multiply(5,5) = ${multiply(5, 5)}
-// divide(100,5) = ${divide(100, 5)}
-// `);
+clearBtn.onclick = () => {
+	history.textContent = ``;
+	text.textContent = ``;
+};
 
-// console.log(
-//     `operate(5,"+",5) = ${operate(5, "+", 5)}
-// operate(4,"-",5) = ${operate(4, "-", 5)}
-// operate(5,"*",5) = ${operate(5, "*", 5)}
-// operate(100,"/",5) = ${operate(100, "/", 5)}
-// operate(5,"",5) = ${operate(5, "", 5)}
-// `);
+delBtn.onclick = () => {
+	text.textContent = ``;
+	history.textContent += `, `;
+};
+
+
+function disableBtn(collection, boolean) {
+	if (boolean) {
+		[...collection].forEach((btn) => {
+			btn.disabled = true;
+		});
+	} else {
+		[...collection].forEach((btn) => {
+			btn.disabled = false;
+		});
+	}
+}
+
+function operate(firstNum, operator, secondNum) {
+	firstNum = +firstNum;
+	secondNum = +secondNum;
+
+	switch (operator) {
+		case `+`:
+			return add(firstNum, secondNum);
+		case `-`:
+			return subtract(firstNum, secondNum);
+		case `*`:
+			return multiply(firstNum, secondNum);
+		case `/`:
+			return divide(firstNum, secondNum);
+		default:
+			return `error`;
+	}
+}
+
+function calculate() {
+
+	///equals only works since this is always called in the event
+	if (calcArr.length > 2) {
+		calcArr.push(operate(calcArr[0], calcArr[1], calcArr[2]));
+		calcArr.splice(0, 3);
+		calcArr.reverse();
+		text.textContent = calcArr[0];
+		history.textContent += `= ` + calcArr[0] + ` `;
+		// console.log(calcArr);
+	}
+}

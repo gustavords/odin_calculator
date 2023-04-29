@@ -1,0 +1,20 @@
+/**
+ * must do's:
+ *  + create calc functions:
+ *      - add, multiply, subtract, divide
+ *      - operate, takes operator and 2 numbers and performs on of the above functions
+ *
+ * + create simple html calculator
+ *      - must have operators +,-,*,/
+ *      - equals and clear button
+ *
+ * + create display functions:
+ *      - display pressed buttons function
+ *
+ * + create logic functions:
+ *      - calculations should happen once at a time, 12 + 7 - 5 * 3 = should yield 42.
+ *      - calculation should happen and be displayed when the third number is pressed
+ *
+ */
+
+//Pseudo Code 1.0
