@@ -44,6 +44,20 @@ function operate(firstNum, operate, secondNum) {
     }
 }
 
+
+let displayValue = ``;
+const display = document.getElementById(`calc-display`);
+const numbers = document.getElementsByClassName(`numBtn`);
+
+for(let button of numbers){
+    button.addEventListener(`click`, () =>{
+
+        display.textContent += button.textContent;
+        displayValue = display.textContent;
+        console.log(displayValue);
+    });
+}
+
 // console.log(
 //     `add(5,5) = ${add(5, 5)}
 // subtract(4,5) = ${subtract(4, 5)}
