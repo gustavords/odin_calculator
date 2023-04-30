@@ -24,11 +24,12 @@ body > h1 {
 }
 
 #calculator {
-	background-color: coral;
+	background-color: wheat;
 	flex-direction: column;
 	height: 400px;
-	width: 500px;
-	padding: 0.2em;
+	width: 300px;
+	padding: .1em;
+	border-radius: .1em;
 	box-shadow: 0px 0px 20px black;
 }
 
@@ -64,6 +65,8 @@ body > h1 {
 .btn {
 	flex: 1;
 	font-size: x-large;
+	border-radius: 9%;
+
 }
 
 .numBtn {
