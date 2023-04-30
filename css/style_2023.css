@@ -15,7 +15,8 @@ body {
 }
 
 body > h1 {
-	background-color: blueviolet;
+	background-color: #cb94ff;
+	color: aliceblue;
 	width: 100%;
 	text-align: center;
 	margin: 0;
@@ -28,6 +29,7 @@ body > h1 {
 	height: 400px;
 	width: 500px;
 	padding: 0.2em;
+	box-shadow: 0px 0px 20px black;
 }
 
 #calc-display {
@@ -46,6 +48,7 @@ body > h1 {
 	text-justify: auto;
 	margin-bottom: 0;
 	margin-top: auto;
+	font-size: xx-large;
 }
 
 #buttons {
@@ -60,11 +63,41 @@ body > h1 {
 
 .btn {
 	flex: 1;
+	font-size: x-large;
 }
 
 .numBtn {
 	background-color: burlywood;
+	color: firebrick;
 }
+
+.oprBtn {
+	background-color: powderblue;
+}
+.oprBtn:disabled {
+	background-color: #55929a;
+	border-style: inset;
+}
+
+.btn:hover:enabled {
+	border-style: inset;
+}
+
+#oprSign,
+#oprDeci {
+	background-color: coral;
+	color: floralwhite;
+}
+#oprDel,
+#oprClr {
+	background-color: lemonchiffon;
+	color: mediumpurple;
+}
+
+#oprDeci:disabled {
+	border-style: inset;
+	background-color: #ff9c78;
+  }
 
 footer {
 	background-color: black;
