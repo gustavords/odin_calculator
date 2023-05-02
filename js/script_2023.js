@@ -63,7 +63,6 @@ for (let button of numbers) {
  * TODO:
  * -possibly place most of it into a calculate function,
  * and just let the event focus on the display
- * - fix the . and operator sequence issue that returns NaN
  */
 
 for (let button of operations) {
@@ -79,9 +78,10 @@ for (let button of operations) {
 			console.log(calcArr);
 		}
 
-		//pushes value into array
+		//pushes display value into array
 		calcArr.push(text.textContent);
 
+		//when operations is pressed
 		if (
 			button.textContent == `+` ||
 			button.textContent == `-` ||
@@ -93,42 +93,9 @@ for (let button of operations) {
 			disableBtn(opr, true);
 		}
 
-		calculate();
-
-		//appends to history display
-		//might come off
-		// if (
-		// 	button.textContent == `+` ||
-		// 	button.textContent == `-` ||
-		// 	button.textContent == `*` ||
-		// 	button.textContent == `/`
-		// ) {
-		// history.textContent += button.textContent + ` `;
-		// }
-	});
-}
-
-// const equalBtn = document.getElementById(`oprEqu`);
-
-// equalBtn.onclick = () =>{
-// 	// console.log(operate(firstNum, currentOperator, secondNum));
-// };
-
-const allBtns = document.getElementsByClassName(`btn`);
-
-let histo = ``;
-for (let button of allBtns) {
-	button.addEventListener(`click`, () => {
-		if (
-			button.textContent === `del` ||
-			button.textContent === `Clear` ||
-			button.textContent == `+/-`
-		) {
-			history.textContent += ``;
-		} else {
-			history.textContent = ``;
-			histo += button.textContent;
-			history.textContent += histo;
+		//will only perform calculation if array is properly sized
+		if (calcArr.length > 2) {
+			calculate();
 		}
 	});
 }
@@ -140,22 +107,15 @@ signBtn.onclick = () => {
 
 deciBtn.onclick = () => {
 	deciBtn.disabled = true;
+	disableBtn(opr, true);
 };
 
 clearBtn.onclick = () => {
-	// history.textContent = ``;
-	histo = ``;
-	history.textContent = histo;
-
-
 	text.textContent = ``;
 };
 
 delBtn.onclick = () => {
 	text.textContent = ``;
-	//mightgo
-	// history.textContent += `, `;
-	histo += `, `;
 };
 
 function disableBtn(collection, boolean) {
@@ -191,14 +151,8 @@ function operate(firstNum, operator, secondNum) {
 }
 
 function calculate() {
-	///equals only works since this is always called in the event
-	if (calcArr.length > 2) {
-		calcArr.push(operate(calcArr[0], calcArr[1], calcArr[2]));
-		calcArr.splice(0, 3);
-		calcArr.reverse();
-		text.textContent = calcArr[0];
-
-		history.textContent += `= ` + calcArr[0] + ` `;
-		// console.log(calcArr);
-	}
+	calcArr.push(operate(calcArr[0], calcArr[1], calcArr[2]));
+	calcArr.splice(0, 3);
+	calcArr.reverse();
+	text.textContent = calcArr[0];
 }

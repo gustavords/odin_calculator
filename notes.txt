@@ -88,3 +88,43 @@ console.log(button.textContent === `=`)
 		// else{
 		// 	history.textContent += operator + `  should not go here`;
 		// }
+
+
+
+
+        ////////////////////////////////
+
+		//has to be added to calculate()
+
+        // const equalBtn = document.getElementById(`oprEqu`);
+
+        // equalBtn.onclick = () =>{
+        // 	// console.log(operate(firstNum, currentOperator, secondNum));
+        // };
+
+        // const allBtns = document.getElementsByClassName(`btn`);
+
+        // let histo = ``;
+        // for (let button of allBtns) {
+        // 	button.addEventListener(`click`, () => {
+        // 		if (
+        // 			button.textContent === `del` ||
+        // 			button.textContent === `Clear` 
+        // 		) {
+        // 			history.textContent += ``;
+        // 		}
+        // 		else if(button.textContent === `+/-`){
+			
+			
+		// 			// histo += text.textContent;
+		// 			// history.textContent += histo;
+
+		// 		} 
+				
+		// 		else {
+		// 			history.textContent = ``;
+		// 			histo += button.textContent;
+		// 			history.textContent += histo;
+		// 		}
+		// 	});
+		// }	
