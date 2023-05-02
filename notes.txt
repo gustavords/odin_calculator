@@ -18,3 +18,73 @@
  */
 
 //Pseudo Code 1.0
+
+does not work as cleanly
+let solution = 0;
+let currentOperator =``;
+console.log(button.textContent === `=`)
+		// if(firstNum === 0){
+		// 	firstNum = +pressed;
+		// 	history.textContent += firstNum;
+		// 	console.log(`firstNum = ${firstNum}`);
+		// 	currentOperator = button.textContent;
+		// 	history.textContent += button.textContent;
+			
+		// }
+		// else if(!(firstNum === 0) && secondNum === 0){
+		// 	secondNum = +pressed;
+		// 	history.textContent += secondNum;
+		// 	console.log(`secondNum = ${secondNum}`);
+		// 	solution = operate(firstNum, currentOperator, secondNum);
+		// 	console.log(`1: ${firstNum} ${currentOperator} ${secondNum} = ${solution} `);
+
+		// 	currentOperator = button.textContent;
+
+		// 	if(button.textContent === `=`){
+		// 		currentOperator = ``;
+		// 	}
+		// 	history.textContent += `= ` +  solution;
+		// 	history.textContent += currentOperator;
+		// 	console.log(` 2: ${firstNum} ${currentOperator} ${secondNum} = ${solution} `);
+
+
+		// }
+		// else if ((!(firstNum === 0) && !(secondNum === 0)) || (button.textContent === `=`)){
+			
+		// 	// console.log(`solution = ${solution}`);
+		// 	// console.log(`${firstNum} ${button.textContent} ${secondNum} = ${solution} `);
+		// 	// history.textContent += solution;
+		// 	firstNum = solution;
+		// 	secondNum = +pressed;
+		// 	history.textContent += secondNum;
+
+		// 	console.log(`firstNum = ${firstNum}`);
+		// 	console.log(`secondNum = ${secondNum}`);
+		// 	solution = operate(firstNum, currentOperator, secondNum);
+		// 	console.log(`3:${firstNum} ${currentOperator} ${secondNum} = ${solution} `);
+
+			
+			
+		// 		currentOperator = button.textContent;
+		// 		// history.textContent += operator + `  fuckary`;
+		// 		history.textContent += `= ` +  solution;
+		// 		history.textContent += button.textContent;
+			
+
+		// }
+		// else if((!(firstNum === 0) && !(secondNum === 0)) || (button.textContent === ``)){
+		// 	firstNum = solution;
+		// 	secondNum = +pressed;
+		// 	history.textContent += secondNum;
+
+		// 	console.log(`firstNum = ${firstNum}`);
+		// 	console.log(`secondNum = ${secondNum}`);
+		// 	solution = operate(firstNum, currentOperator, secondNum);
+		// 	console.log(`3:${firstNum} ${currentOperator} ${secondNum} = ${solution} `);
+		// }
+		// else if(button.textContent === `=`){
+		// 	history.textContent += operator + `  fuckary`;
+		// }
+		// else{
+		// 	history.textContent += operator + `  should not go here`;
+		// }

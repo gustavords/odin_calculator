@@ -12,9 +12,9 @@ const signBtn = document.getElementById(`oprSign`);
 
 let displayHistory = ``;
 let pressed = ``;
-// let firstNum;
-// let secondNum;
-let operator;
+let firstNum = 0;
+let secondNum = 0;
+let operator = ``;
 
 /**
  * TODO: turn into an operations object
@@ -65,6 +65,7 @@ for (let button of numbers) {
  * and just let the event focus on the display
  * - fix the . and operator sequence issue that returns NaN
  */
+
 for (let button of operations) {
 	button.addEventListener(`click`, () => {
 		deciBtn.disabled = false;
@@ -106,6 +107,32 @@ for (let button of operations) {
 		// }
 	});
 }
+
+// const equalBtn = document.getElementById(`oprEqu`);
+
+// equalBtn.onclick = () =>{
+// 	// console.log(operate(firstNum, currentOperator, secondNum));
+// };
+
+const allBtns = document.getElementsByClassName(`btn`);
+
+let histo = ``;
+for (let button of allBtns) {
+	button.addEventListener(`click`, () => {
+		if (
+			button.textContent === `del` ||
+			button.textContent === `Clear` ||
+			button.textContent == `+/-`
+		) {
+			history.textContent += ``;
+		} else {
+			history.textContent = ``;
+			histo += button.textContent;
+			history.textContent += histo;
+		}
+	});
+}
+
 signBtn.onclick = () => {
 	// +text.textContent > 0 ? +text.textContent * -1 : +text.textContent * 1;
 	text.textContent = +text.textContent * -1;
@@ -116,7 +143,11 @@ deciBtn.onclick = () => {
 };
 
 clearBtn.onclick = () => {
-	history.textContent = ``;
+	// history.textContent = ``;
+	histo = ``;
+	history.textContent = histo;
+
+
 	text.textContent = ``;
 };
 
@@ -124,6 +155,7 @@ delBtn.onclick = () => {
 	text.textContent = ``;
 	//mightgo
 	// history.textContent += `, `;
+	histo += `, `;
 };
 
 function disableBtn(collection, boolean) {
@@ -165,7 +197,8 @@ function calculate() {
 		calcArr.splice(0, 3);
 		calcArr.reverse();
 		text.textContent = calcArr[0];
-		// history.textContent += `= ` + calcArr[0] + ` `;
+
+		history.textContent += `= ` + calcArr[0] + ` `;
 		// console.log(calcArr);
 	}
 }
