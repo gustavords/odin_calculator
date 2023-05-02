@@ -125,7 +125,11 @@ for (let button of allBtns) {
 			button.textContent == `+/-`
 		) {
 			history.textContent += ``;
-		} else {
+		}else if(button.textContent === `+/-`){
+			history.textContent += `-`;
+		} 
+		
+		else {
 			history.textContent = ``;
 			histo += button.textContent;
 			history.textContent += histo;
