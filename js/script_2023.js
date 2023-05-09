@@ -1,4 +1,4 @@
-const calcArr = [];
+// const calcArr = [];
 const display = document.getElementById(`calc-display`);
 const text = document.getElementById(`text`);
 const numbers = document.getElementsByClassName(`numBtn`);
@@ -10,78 +10,69 @@ const delBtn = document.getElementById(`oprDel`);
 const deciBtn = document.getElementById(`oprDeci`);
 const signBtn = document.getElementById(`oprSign`);
 
-let displayHistory = ``;
+// let displayHistory = ``;
 let pressed = ``;
-let firstNum = 0;
-let secondNum = 0;
+// let firstNum = 0;
+// let secondNum = 0;
 let operator = ``;
+
+const newCalcArr = [];
 
 /**
  * TODO: turn into an operations object
  *
  */
-const add = (a, b) => {
-	return a + b;
-};
-const subtract = (a, b) => {
-	return a - b;
-};
-const multiply = (a, b) => {
-	return a * b;
-};
+const add = (a, b) => { return a + b; };
+const subtract = (a, b) => { return a - b; };
+const multiply = (a, b) => { return a * b; };
 const divide = (a, b) => {
 	if (a === 0 && b === 0) return `you can't do that silly, error`;
 	return a / b;
 };
-const modulus = (a, b) => {
-	return a % b;
-};
+const modulus = (a, b) => { return a % b; };
 
-/**
- * TODO: make history work for multiple numbers pressed
- */
-//event for displays pressed numbers
+//event for displaying pressed numbers
 for (let button of numbers) {
 	button.addEventListener(`click`, () => {
-		//removes text
+		//removes text from display
 		text.textContent = ``;
-		//creates a string with all numbers pressed
+		//concatenates a string with all numbers pressed
 		pressed += button.textContent;
 		//displays to display
 		text.textContent = pressed;
 		//re-enables operation buttons
-
-		//might go
-		// history.textContent += pressed + ` `;
-
-		disableBtn(opr, false);
+		disableBtns(opr, false);
 	});
 }
 
-//does all operations
 /**
  * TODO:
  * -possibly place most of it into a calculate function,
- * and just let the event focus on the display
+ * and just let the event focus on the display of the calculations
  */
+//display the calculation to the display
 
 for (let button of operations) {
 	button.addEventListener(`click`, () => {
+		//re-enables operation buttons
 		deciBtn.disabled = false;
 
 		//clears pressed buttons
 		pressed = ``;
 
-		//for array after equals is used
-		if (calcArr.length === 1) {
-			calcArr.splice(0, 1);
-			console.log(calcArr);
+		//sends whats on screen to the array
+		newCalcArr.push(text.textContent);
+
+		/////HISTORY Display
+		displayHistory(text.textContent);
+
+		///error handling...................................
+		if (typeof +newCalcArr[0] !== `number` || newCalcArr[0] == ``) {
+			console.log(`not a number`);
+			newCalcArr.length = 0;
 		}
 
-		//pushes display value into array
-		calcArr.push(text.textContent);
-
-		//when operations is pressed
+		//when operations buttons are pressed
 		if (
 			button.textContent == `+` ||
 			button.textContent == `-` ||
@@ -89,13 +80,42 @@ for (let button of operations) {
 			button.textContent == `/` ||
 			button.textContent == `%`
 		) {
-			calcArr.push(button.textContent);
-			disableBtn(opr, true);
-		}
+			disableBtns(opr, true);
 
-		//will only perform calculation if array is properly sized
-		if (calcArr.length > 2) {
-			calculate();
+			//calculates if user keeps going
+			if (newCalcArr.length > 2) {
+				calculate(newCalcArr);
+				let temp = newCalcArr.splice(3, 3);
+				newCalcArr.length = 0;
+				newCalcArr[0] = temp;
+				newCalcArr.push(button.textContent);
+			} else {
+				newCalcArr.push(button.textContent);
+			}
+
+			//displays button pressed into history
+			displayHistory(button.textContent);
+
+		}
+		else if (button.textContent == `=`) {
+
+			//after long string of calculation user wants total
+			if (newCalcArr.length > 3) {
+				calculate(newCalcArr);
+				let temp = newCalcArr[4];
+				newCalcArr.length = 0;
+				newCalcArr[0] = temp;
+				// console.log(newCalcArr);
+			}
+
+			//displays into history
+			displayHistory(button.textContent);
+
+			//last calculation, resets array
+			newCalcArr.push(button.textContent);
+			calculate(newCalcArr);
+			displayHistory(newCalcArr[newCalcArr.length - 1] + ` `);
+			newCalcArr.length = 0;
 		}
 	});
 }
@@ -107,18 +127,27 @@ signBtn.onclick = () => {
 
 deciBtn.onclick = () => {
 	deciBtn.disabled = true;
-	disableBtn(opr, true);
+	disableBtns(opr, true);
 };
 
 clearBtn.onclick = () => {
+	history.textContent = ``;
 	text.textContent = ``;
+	pressed = ``;
+	newCalcArr.length = 0;
+	disableBtns(opr, false);
 };
 
 delBtn.onclick = () => {
 	text.textContent = ``;
+	pressed = ``;
 };
 
-function disableBtn(collection, boolean) {
+function displayHistory(string) {
+	history.textContent += string;
+}
+
+function disableBtns(collection, boolean) {
 	if (boolean) {
 		[...collection].forEach((btn) => {
 			btn.disabled = true;
@@ -130,6 +159,9 @@ function disableBtn(collection, boolean) {
 	}
 }
 
+/**
+ * TODO: calculations should be rounded after certain decimal point
+ */
 function operate(firstNum, operator, secondNum) {
 	firstNum = +firstNum;
 	secondNum = +secondNum;
@@ -150,9 +182,8 @@ function operate(firstNum, operator, secondNum) {
 	}
 }
 
-function calculate() {
-	calcArr.push(operate(calcArr[0], calcArr[1], calcArr[2]));
-	calcArr.splice(0, 3);
-	calcArr.reverse();
-	text.textContent = calcArr[0];
+function calculate(array) {
+	array.push(operate(array[0], array[1], array[2]));
+	text.textContent = array[array.length - 1];
+	console.log(`newCalcArr --> ${array}`);
 }
